@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "utils.h"
+#include "coloracao-classes.h"
 #define empty 0
-
-typedef struct Num{
-	int x, y; //coordenadas na sudoku original
-	int val; //"cor"
-	int block; //"submatriz do sudoku"
-} Num;
+#define MAX_COLORS_INIT 9
 
 int main(int argc, char const *argv[]){
 	int dim, color, count = 0;
 	scanf("%d", &dim);
 
-	Num *nodes = (Num*)malloc((dim*dim)*sizeof(Num)); //conf isso aqui
+	Num *nodes = (Num*)malloc((dim*dim)*sizeof(Num)); 
+	Vertex_colors used_colors[MAX_COLORS_INIT];
+
+	for(int i = 0; i < MAX_COLORS_INIT; i++){//ver se isso aqui faz algum sentido
+		used_colors[i].next = NULL;
+		used_colors[i].vertex = -1;  
+	}
 
 	int subdivision = sqrt(dim);
 	for (int i = 0; i < dim; ++i){
@@ -22,6 +25,9 @@ int main(int argc, char const *argv[]){
 			nodes[count].x = i;
 			nodes[count].y = j;
 			nodes[count].val = color;
+			if(color != 0){//tbm ver se é assim (a cor vai ser UMA A MAIS Q NO VETOR, ENTAO color - 1)
+				insere_lista(color-1, count, used_colors); //tem um vetor em que cada pos representa uma cor (= pos + 1) e cada cor tem todos os vertices que possui ja
+			}
 			if(i < subdivision && j < subdivision) nodes[count].block = 1;
 			if(i < subdivision && j >= subdivision && j < 2*subdivision) nodes[count].block = 2;
 			if(i < subdivision && j >= 2*subdivision) nodes[count].block = subdivision;
@@ -36,9 +42,9 @@ int main(int argc, char const *argv[]){
 	}
 	//tem o vetor de nós do grafo, com suas cores previamente definidas e coordenadas na sudoku 
 
-	for (int i = 0; i < count; ++i){
-		printf("Matrix[%d][%d]: %d\n", nodes[i].x, nodes[i].y, nodes[i].val);
-	}
+	// for (int i = 0; i < count; ++i){
+	// 	printf("Matrix[%d][%d]: %d\n", nodes[i].x, nodes[i].y, nodes[i].val);
+	// }
 	//printando a matriz do sudoku
 
 	int **graph = (int**)malloc((dim*dim)*sizeof(int*));
@@ -57,13 +63,25 @@ int main(int argc, char const *argv[]){
 		}
 	}
 
-	for (int i = 0; i < dim*dim; i++){
-		for (int j = 0; j < dim*dim; j++){
-			printf("%d ", graph[i][j]);
+	// for (int i = 0; i < dim*dim; i++){
+	// 	for (int j = 0; j < dim*dim; j++){
+	// 		printf("%d ", graph[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+
+	printf("Vetor de cores que vieram: \n");
+	for(int i = 0; i < MAX_COLORS_INIT; i++){
+		printf("cor %d: ", i+1);
+		Vertex_colors *aux = &used_colors[i];
+		while(aux->next != NULL){
+			printf("%d ", aux->vertex);
+			aux = aux->next;
 		}
-		printf("\n");
+		printf("%d\n", aux->vertex);
 	}
 
+	colore(nodes, used_colors, 81, graph);
 
 	free(nodes);
 	for (int i = 0; i < dim*dim; i++){
