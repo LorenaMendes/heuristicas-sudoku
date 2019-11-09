@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]){
 			nodes[count].y = j;
 			nodes[count].val = color;
 			if(color != 0){//tbm ver se é assim (a cor vai ser UMA A MAIS Q NO VETOR, ENTAO color - 1)
-				insere_lista(color-1, count, used_colors); //tem um vetor em que cada pos representa uma cor (= pos + 1) e cada cor tem todos os vertices que possui ja
+				insert_list(color-1, count, used_colors); //tem um vetor em que cada pos representa uma cor (= pos + 1) e cada cor tem todos os vertices que possui ja
 			}
 			if(i < subdivision && j < subdivision) nodes[count].block = 1;
 			if(i < subdivision && j >= subdivision && j < 2*subdivision) nodes[count].block = 2;
@@ -81,7 +81,7 @@ int main(int argc, char const *argv[]){
 		printf("%d\n", aux->vertex);
 	}
 
-	colore(nodes, used_colors, 81, graph);
+	colorNodes(nodes, used_colors, 81, graph);
 
 	free(nodes);
 	for (int i = 0; i < dim*dim; i++){

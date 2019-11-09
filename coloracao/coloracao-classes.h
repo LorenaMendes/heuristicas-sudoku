@@ -1,8 +1,8 @@
 #ifndef CC_H
 #define CC_H
 
-void insere_cor(Num *nodes, Vertex_colors *used_colors, int dim, int**graph, int color, int pos);
-void colore(Num *nodes, Vertex_colors *used_colors, int dim, int**graph);
-int falta_cor(Num *nodes, int dim);
+void insert_color(Num *nodes, Vertex_colors *used_colors, int dim, int**graph, int color, int pos);
+void colorNodes(Num *nodes, Vertex_colors *used_colors, int dim, int**graph);
+int missing_color(Num *nodes, int dim);
 
 #endif
