@@ -14,6 +14,6 @@ struct Vertex_colors{
 	int vertex;
 };
 
-void insere_lista(int, int, Vertex_colors*);
+void insert_list(int, int, Vertex_colors*);
 
 #endif

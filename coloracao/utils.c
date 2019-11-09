@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "utils.h"
 
-void insere_lista(int pos, int vertex, Vertex_colors *used_colors){
+void insert_list(int pos, int vertex, Vertex_colors *used_colors){
 	if(used_colors[pos].vertex == -1){
 		// printf("entrou aqui na cor %d com vertice: %d\n", pos+1, vertex);
 		used_colors[pos].vertex = vertex;
