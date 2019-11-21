@@ -9,7 +9,7 @@
 #include "../Header/lmxrlf.hpp"
 #include "../Header/hybrid_dsatur.hpp"
 #include "../Header/hybrid_lmxrlf.hpp"
-
+#include "../Header/tabucol.hpp"
 using std::cout;
 using std::cerr;
 using std::endl;
@@ -23,6 +23,7 @@ using GraphColoring::Lmxrlf;
 using GraphColoring::HybridDsatur;
 using GraphColoring::HybridLmxrlf;
 using GraphColoring::GraphColor;
+using GraphColoring::Tabucol;
 
 //functions used to translate test cases into a graph using a map
 //two types of test cases requires two ways to parse graph (list and matrix)
@@ -52,7 +53,7 @@ int main(int argc, char** argv) {
         return -1;  
     }
 
-    GraphColor *graph = new HybridDsatur(input_graph);
+    GraphColor *graph = new Tabucol(input_graph);
 
     graph->color();
     graph->print_chromatic();

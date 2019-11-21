@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 // Number of vertices in the graph
-#define V 81
+#define V 16
 typedef struct Num{
 	int x, y; //coordenadas na sudoku original
 	int val; //"cor"
@@ -141,7 +141,7 @@ int main()
 		}
 	}
 	//tem o vetor de nós do grafo, com suas cores previamente definidas e coordenadas na sudoku 
-  printSolution(colors);
+//  printSolution(colors);
 	for (int i = 0; i < count; ++i){
 		//printf("Matrix[%d][%d]: %d\n", nodes[i].x, nodes[i].y, nodes[i].val);
 	}
@@ -166,12 +166,14 @@ int main()
 
 	for (int i = 0; i < aux*aux; i++){
 		for (int j = 0; j < aux*aux; j++){
-			//printf("%d ", graph[i][j]);
+			printf("%d ", graph[i][j]);
         }
+	printf("\n"); 
     }
 
     int m = 150; // Number of colors 
-    graphColoring(graph, m, colors, fixed_numbers); 
+    
+  //  graphColoring(graph, m, colors, fixed_numbers); 
     return 0; 
 } 
 
