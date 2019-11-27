@@ -10,6 +10,7 @@ namespace GraphColoring{
 		public: 
 			/* Constructors */
 			Dsatur(map<string,vector<string> > graph) : GraphColor(graph) {};
+			Dsatur(map<string,vector<string> > graph, map<string,int> input_colors) : GraphColor(graph, input_colors) {};
 
 			/* Mutators */
 			map<string,int> color();

@@ -20,6 +20,7 @@ namespace GraphColoring {
             /* Constructors */
             GraphColor();
             GraphColor(map<string, vector<string>> graph);
+            GraphColor(map<string, vector<string>> graph, map<string, int> input_colors);
 
             /* Mutators */
             virtual map<string,int> color() = 0;

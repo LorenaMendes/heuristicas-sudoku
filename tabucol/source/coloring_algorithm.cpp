@@ -16,6 +16,14 @@ GraphColoring::GraphColor::GraphColor() {
     this->graph_colors = map<string,int>();
 }
 
+GraphColoring::GraphColor::GraphColor(map<string,vector<string>> graph, map<string, int> input_colors) {
+    this->graph = graph;
+    this->graph_colors = input_colors;
+    //for(map<string,vector<string>>::iterator itr = graph.begin(); itr != graph.end(); itr++) {
+    //    this->graph_colors[itr->first] = -1;
+    //}
+}
+
 GraphColoring::GraphColor::GraphColor(map<string,vector<string>> graph) {
     this->graph = graph;
     for(map<string,vector<string>>::iterator itr = graph.begin(); itr != graph.end(); itr++) {

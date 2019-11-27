@@ -16,6 +16,7 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 using std::ostringstream;
+using std::to_string;
 
 using GraphColoring::Dsatur;
 using GraphColoring::Mcs;
@@ -33,6 +34,7 @@ void parse_edge_list(char* input_file);
 void parse_edge_matrix(char* input_file);
 
 map<string,vector<string> > input_graph;
+map<string, int> input_colors;
 
 int main(int argc, char** argv) {
     if(argc < 2) {
@@ -53,10 +55,11 @@ int main(int argc, char** argv) {
         return -1;  
     }
 
-    GraphColor *graph = new Tabucol(input_graph);
+    GraphColor *graph = new Dsatur(input_graph, input_colors);
 
     graph->color();
     graph->print_chromatic();
+    graph->print_coloring();
     if(!graph->is_valid()) {
         cerr << "Graph coloring is invalid" << endl;
     }
@@ -182,6 +185,11 @@ void parse_edge_matrix(char* input_file) {
         Getline(file,line);
         int n = atoi(line.c_str());
         int i = 0;
+        Getline(file, line);
+        vector<string> colors = split(line);
+        int x = 0;
+        for (auto zzz : colors)
+            input_colors[to_string(x++)] = atoi(zzz.c_str());
         while(Getline(file,line)) {
             i += 1;
             vector<string> words = split(line);
