@@ -3,6 +3,8 @@
 #include <math.h>
 #include "utils.h"
 #include "coloracao-classes.h"
+#include "meta.h"
+
 #define empty 0
 #define MAX_COLORS_INIT 9
 
@@ -27,7 +29,9 @@ int main(int argc, char const *argv[]){
 			nodes[count].val = color;
 			if(color != 0){//tbm ver se é assim (a cor vai ser UMA A MAIS Q NO VETOR, ENTAO color - 1)
 				insert_list(color-1, count, used_colors); //tem um vetor em que cada pos representa uma cor (= pos + 1) e cada cor tem todos os vertices que possui ja
+				nodes[count].pre_def = 1;
 			}
+			else nodes[count].pre_def = 0;
 			if(i < subdivision && j < subdivision) nodes[count].block = 1;
 			if(i < subdivision && j >= subdivision && j < 2*subdivision) nodes[count].block = 2;
 			if(i < subdivision && j >= 2*subdivision) nodes[count].block = subdivision;
@@ -82,6 +86,32 @@ int main(int argc, char const *argv[]){
 	}
 
 	colorNodes(nodes, used_colors, 81, graph);
+
+	printf("SO PRA VER Q Q PEGA: \n");
+	int x = 0;
+	for (int i = 0; i < dim; ++i){
+		for(int j = 0; j < dim; j++){
+			if(nodes[x].val < 10)
+				printf("%d  ", nodes[x].val);
+			else printf("%d ", nodes[x].val);
+			x++;
+		}
+		printf("\n");
+	}
+
+	metaheuristica(graph, nodes, dim);
+
+	x = 0;
+	printf("SO PRA VER Q Q PEGA POS META: \n");
+	for (int i = 0; i < dim; ++i){
+		for(int j = 0; j < dim; j++){
+			if(nodes[x].val < 10)
+				printf("%d  ", nodes[x].val);
+			else printf("%d ", nodes[x].val);
+			x++;
+		}
+		printf("\n");
+	}
 
 	free(nodes);
 	for (int i = 0; i < dim*dim; i++){
